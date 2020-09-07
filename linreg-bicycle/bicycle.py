@@ -1,10 +1,7 @@
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 from sklearn import model_selection
 from sklearn.linear_model import LinearRegression
-
-plt.rcParams['figure.figsize'] = (20.0, 10.0)
 
 predict = 'cnt'
 
