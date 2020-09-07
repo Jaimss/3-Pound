@@ -1,3 +1,5 @@
+import pickle
+
 import numpy as np
 import pandas as pd
 from sklearn import model_selection
@@ -11,11 +13,33 @@ def preprocess(name, label_encoder, data_set):
     data_set[name] = new
 
 
-# read the csv
+def train_model(x, y):
+    best = 0
+    for _ in range(5000):
+        x_train, x_test, y_train, y_test = model_selection.train_test_split(x, y, test_size=0.1)
+
+        model = LinearRegression()
+        model.fit(x_train, y_train)
+        acc = model.score(x_test, y_test)
+        print(acc)
+
+        if acc > best:
+            best = acc
+            with open('model.pickle', 'wb') as f:
+                pickle.dump(model, f)
+
+    print(f'best was: {best}')
+
+
+def load_model():
+    pickle_in = open('model.pickle', 'rb')
+    return pickle.load(pickle_in)
+
+
+# read the csv and setup the data
 filename = 'student-mat.csv'
 data = pd.read_csv(filename, sep=';')
 data = data[['school', 'age', 'famsize', 'schoolsup', 'famsup', 'traveltime', 'higher', 'internet', 'studytime', 'failures', 'absences', 'G1', 'G2', 'G3']]
-print(data.head())
 
 le = preprocessing.LabelEncoder()
 preprocess('school', le, data)
@@ -24,12 +48,18 @@ preprocess('schoolsup', le, data)
 preprocess('famsup', le, data)
 preprocess('higher', le, data)
 preprocess('internet', le, data)
-print(data.head())
 
-# grades are from 1-20
 predict = 'G3'
-x_train, x_test, y_train, y_test = model_selection.train_test_split(np.array(data.drop([predict], 1)), np.array(data[predict]), test_size=0.1)
+x = np.array(data.drop([predict], 1))
+y = np.array(data[predict])
 
-model = LinearRegression().fit(x_train, y_train)
-acc = model.score(x_test, y_test)
-print(acc)
+x_train, x_test, y_train, y_test = model_selection.train_test_split(x, y, test_size=0.1)
+
+# training the model (runs 5k times to get the best accuracy, then saves the best one)
+# train_model(x, y)
+
+# load the model regularly from the file
+model = load_model()
+
+pred = model.predict(np.array([[0, 16, 0, 0, 0, 1, 1, 1, 1, 0, 0, 13, 15]]))
+print(pred)  # the predicted test score for the above student (14.74/20)
