@@ -5,3 +5,4 @@ Click the links below to see each of the different things I did during my three 
 
 - Linear Regression
     - [Bicycle Data Set](https://github.com/Jaimss/3-Pound/tree/master/linreg-bicycle)
+    - [Student Scores](https://github.com/Jaimss/3-Pound/tree/master/linreg-student-performance)
