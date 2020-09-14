@@ -3,8 +3,8 @@ import pickle
 import numpy as np
 import pandas as pd
 from sklearn import model_selection
-from sklearn.linear_model import LinearRegression
 from sklearn import preprocessing
+from sklearn.linear_model import LinearRegression
 
 
 def preprocess(name, label_encoder, data_set):
@@ -61,8 +61,5 @@ x_train, x_test, y_train, y_test = model_selection.train_test_split(x, y, test_s
 # load the model regularly from the file
 model = load_model()
 
-pred = model.predict(np.array([[0, 16, 0, 0, 0, 1, 1, 1, 1, 0, 0, 13, 15]]))
-print(pred)  # the predicted test score for the above student (14.74/20)
-
-pred = model.predict(np.array([[1, 2, 0, 0, 0, 1, 1, 1, 0, 0, 0, 19, 17]]))
-print(pred)
+pred = model.predict(x_test[0].reshape(1, -1))
+print(pred)  # the predicted test score for the above student
