@@ -16,8 +16,8 @@ y = iris.target
 h = .02  # step size in the mesh
 
 # Create color maps
-cmap_light = ListedColormap(['#FFAAAA', '#AAFFAA', '#AAAAFF'])
-cmap_bold = ListedColormap(['#FF0000', '#00FF00', '#0000FF'])
+cmap_light = ListedColormap(['#ffc0cb', '#9CECFB', '#f7b733'])
+cmap_bold = ListedColormap(['#800080', '#0052D4', '#fc4a1a'])
 
 for weights in ['uniform', 'distance']:
     # we create an instance of Neighbours Classifier and fit the data.
