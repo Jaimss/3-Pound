@@ -8,7 +8,7 @@ from sklearn import neighbors, datasets
 n_neighbors = 15
 
 # import some data to play with
-iris = datasets.load_iris()
+iris = datasets.make_classification(n_samples=500)
 print(iris)
 X = iris.data[:, :2]  # we only take the first two features. We could
 # avoid this ugly slicing by using a two-dim dataset
