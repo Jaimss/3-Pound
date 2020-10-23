@@ -71,7 +71,8 @@ x_train, x_test, y_train, y_test = model_selection.train_test_split(x, y, test_s
 # load the model regularly from the file
 model = load_model()
 
-show_graph(data, 'absences')
+show_graph(data, 'G1')
+show_graph(data, 'G2')
 
 pred = model.predict(x_test[0].reshape(1, -1))
-print(pred)  # the predicted test score for the above student
+# print(pred)  # the predicted test score for the above student
